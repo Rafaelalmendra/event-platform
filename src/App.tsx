@@ -1,5 +1,7 @@
+import Event from "./pages/Event";
+
 const App = () => {
-  return <h1 className="text-2xl">hello world</h1>;
+  return <Event />;
 };
 
 export default App;
