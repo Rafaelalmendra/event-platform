@@ -1,23 +1,46 @@
-import { CheckCircle } from "phosphor-react";
+import { isPast, format } from "date-fns";
+import { CheckCircle, Lock } from "phosphor-react";
+import ptBR from "date-fns/locale/pt-BR";
 
-const Lesson = () => {
+interface LessonProps {
+  slug: string;
+  title: string;
+  availableAt: Date;
+  type: "live" | "class";
+}
+
+const Lesson = ({ slug, title, availableAt, type }: LessonProps) => {
+  const isLessonAvailable = isPast(availableAt);
+  const availableDateFormatted = format(
+    availableAt,
+    "EEEE' • 'd' de 'MMMM' • 'k'h'mm' ",
+    {
+      locale: ptBR,
+    }
+  );
+
   return (
     <a href="#">
-      <span className="text-gray-300">Domingo • 20 de junho • 19h00</span>
+      <span className="text-gray-300">{availableDateFormatted}</span>
 
       <div className="rounded border border-gray-500 p-4 mt-2">
         <header className="flex items-center justify-between">
-          <span className="flex gap-[0.625rem] items-center text-sm text-blue-500 font-medium">
-            <CheckCircle size={20} /> Conteúdo liberado
-          </span>
+          {isLessonAvailable ? (
+            <span className="flex gap-[0.625rem] items-center text-sm text-blue-500 font-medium">
+              <CheckCircle size={20} /> Conteúdo liberado
+            </span>
+          ) : (
+            <span className="flex gap-[0.625rem] items-center text-sm text-orange-500 font-medium">
+              <Lock size={20} /> Em breve
+            </span>
+          )}
+
           <span className="text-xs rounded py-[0.125rem] px-2 text-white border border-green-300 font-bold">
-            AO VIVO
+            {type === "live" ? "AO VIVO" : "AULA PRÁTICA"}
           </span>
         </header>
 
-        <strong className="text-gray-200 mt-5 block">
-          Abertura do evento Ignite Lab
-        </strong>
+        <strong className="text-gray-200 mt-5 block">{title}</strong>
       </div>
     </a>
   );
