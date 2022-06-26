@@ -9,6 +9,7 @@ const GET_LESSONS_QUERY = gql`
       id
       slug
       title
+      lessonType
       availableAt
     }
   }
