@@ -15,11 +15,10 @@ const Event = () => {
         {slug ? (
           <Video lessonSlug={slug} />
         ) : (
-          <div className="flex-1 flex justify-center items-center">
+          <div className="flex-1 flex justify-center mt-24">
             <h2 className="text-2xl font-bold">Selecione uma aula</h2>
           </div>
         )}
-
         <Sidebar />
       </main>
     </div>

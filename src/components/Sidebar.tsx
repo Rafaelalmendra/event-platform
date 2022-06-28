@@ -38,8 +38,8 @@ const Sidebar = () => {
         {data?.lessons.map((lesson) => (
           <Lesson
             key={lesson.id}
-            slug={lesson.slug}
             title={lesson.title}
+            lessonSlug={lesson.slug}
             type={lesson.lessonType}
             availableAt={new Date(lesson.availableAt)}
           />
